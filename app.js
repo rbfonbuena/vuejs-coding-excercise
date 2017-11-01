@@ -5,7 +5,7 @@ const app = new Vue({
     toCurrency: 'AUD',
     fromRate: 1,
     toRate: 0,
-    currencies: ['AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'CZK', 'DKK', 'GBP', 'HKD', 'HRK', 'HUF', 'IDR', 'ILS', 'INR', 'JPY', 'KRW', 'MXN', 'MYR', 'NOK', 'NZD', 'PHP', 'PLN', 'RON', 'RUB', 'SEK', 'SGD', 'THB', 'TRY', 'USD', 'ZAR'],
+    currencies: null,
     rates: null,
     results: [],
     errors: []
@@ -16,14 +16,28 @@ const app = new Vue({
     fromRate: 'getQuoteRate',
   },
   methods: {
+    handleCurrencyChange: (e) => {
+      let selectedCurrency = e.target.options;
+      let index = e.target.selectedIndex;
+      console.log(selectedCurrency[index].value);
+      return this.fromCurrency = selectedCurrency[index].value;
+    },
+    getCurrencies: function() {
+      axios.get('data/currency.json')
+      .then(response => {
+        this.currencies = response.data;
+      })
+    },
     getFxRates: function() {
-      axios.get('http://api.fixer.io/latest?base='+this.fromCurrency)
+      axios.get('https://api.fixer.io/latest?base='+this.fromCurrency)
       .then(response => {
         this.results = response.data;
         if ( this.fromCurrency === this.toCurrency ) {
-          this.toRate = this.fromRate * 1;
+          let newRate = this.fromRate * 1;
+          this.toRate = newRate.toFixed(3);
         } else {
-          this.toRate = this.fromRate * this.results.rates[this.toCurrency];
+          let newRate = this.fromRate * this.results.rates[this.toCurrency];
+          this.toRate = newRate.toFixed(3);
         }
       })
       .catch(e => {
@@ -31,8 +45,13 @@ const app = new Vue({
       })
     },
     getQuoteRate: function() {
-      if ( this.fromCurrency === this.toCurrency ) return this.toRate = this.fromRate * 1;
-      return this.toRate = this.fromRate * this.results.rates[this.toCurrency];
+      if ( this.fromCurrency === this.toCurrency ) {
+        let newRate = this.fromRate * 1;
+        return this.toRate = newRate.toFixed(3);
+      } else {
+        let newRate = this.fromRate * this.results.rates[this.toCurrency];
+        return this.toRate = newRate.toFixed(3);
+      }
     },
   },
   computed: {
@@ -40,6 +59,7 @@ const app = new Vue({
   mounted: function() {
     this.$nextTick(function() {
       this.getFxRates();
+      this.getCurrencies();
     })
   }
 })

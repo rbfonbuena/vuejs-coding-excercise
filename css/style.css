@@ -19,6 +19,52 @@ h1,h2,h3,h4,h5,h6 {
   line-height: 1.2;
 }
 
+.align-right {
+  text-align: right;
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?awqn1e');
+  src:  url('../fonts/icomoon.eot?awqn1e#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?awqn1e') format('truetype'),
+    url('../fonts/icomoon.woff?awqn1e') format('woff'),
+    url('../fonts/icomoon.svg?awqn1e#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-code:before {
+  content: "\f05f";
+}
+.icon-gear:before {
+  content: "\f02f";
+}
+.icon-gist:before {
+  content: "\f00e";
+}
+.icon-heart:before {
+  content: "\2665";
+}
+.icon-mark-github:before {
+  content: "\f00a";
+}
+
 .container {
   display: flex;
   align-items: center;
@@ -34,8 +80,7 @@ h1,h2,h3,h4,h5,h6 {
 .header h1 {
   position: relative;
   display: inline-block;
-  margin-top: 0;
-  margin-bottom: 1rem;
+  margin: 0 auto;
   line-height: 1.1;
 }
 
@@ -51,25 +96,39 @@ h1,h2,h3,h4,h5,h6 {
 
 .main {
   width: 100%;
-  margin: 0 auto;
+  margin: 20px auto;
 }
 
 .fieldrow {
   text-align: center;
+  margin: 10px auto;
 }
 
 .field {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px auto;
 }
 
 .field-select {
+  position: relative;
   /*display: inline-block;*/
   /*height: 40px;*/
   margin: 0 auto;
   background: #FFC107;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.field-select span {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 40px;
+  background: #ffc107;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
@@ -80,10 +139,11 @@ input[type="text"] {
 }
 
 select {
-  width: 100px;
+  position: relative;
+  width: 80px;
   height: 40px;
   margin: 0 5px;
-  padding: 0 10px;
+  padding: 0;
   color: white;
   font-family: inherit;
   font-size: 24px;
@@ -97,12 +157,16 @@ select {
   text-align-last: center;
   background: none;
   border: 0;
+  opacity: 0;
+  z-index: 2;
 }
 
 option {
   color: #333;
   font-family: sans-serif;
+  font-size: 14px;
   font-weight: normal;
+  text-align-last: left;
   background-color: white;
 }
 
@@ -121,6 +185,35 @@ input[type="text"] {
   border-bottom-right-radius: 4px;
 }
 
+.data-time {
+  text-align: right;
+  color: rgba(255,255,255,0.5);
+  font-size: 14px;
+}
+
+.data-time strong {
+  /*color: white;*/
+}
+
 .footer {
+  /*display: flex;
+  align-items: center;
+  justify-content: space-between;*/
+  margin: 20px auto;
   text-align: center;
+}
+
+.github-source {
+  color: inherit;
+  font-size: 32px;
+  text-decoration: none;
+  opacity: 0.25;
+}
+
+.github-source:hover {
+  opacity: 1;
+}
+
+.copyright {
+  margin: 0 auto;
 }

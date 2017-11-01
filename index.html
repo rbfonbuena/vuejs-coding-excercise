@@ -25,10 +25,9 @@
       <div class="fieldrow fieldrow-from">
         <div class="field">
           <div class="field-select">
-            <select v-model="fromCurrency">
-              <option v-for="currency in currencies" :value="currency">
-                {{ currency }}
-              </option>
+            <span>{{ fromCurrency }}</span>
+            <select v-model="fromCurrency" @change="handleCurrencyChange">
+              <option v-for="(name,code) in currencies" :value="code">{{ code }} - {{ name }}</option>
             </select>
           </div>
           <input type="text" v-model="fromRate">
@@ -38,10 +37,9 @@
       <div class="fieldrow fieldrow-to">
         <div class="field">
           <div class="field-select">
-            <select v-model="toCurrency">
-              <option v-for="currency in currencies" :value="currency">
-                {{ currency }}
-              </option>
+            <span>{{ toCurrency }}</span>
+            <select v-model="toCurrency" @change="handleCurrencyChange">
+              <option v-for="(name,code) in currencies" :value="code">{{ code }} - {{ name }}</option>
             </select>
           </div>
           <input readonly type="text" :value="toRate">

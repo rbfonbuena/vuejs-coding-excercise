@@ -49,6 +49,9 @@ h1,h2,h3,h4,h5,h6 {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-refresh:before {
+  content: "\f021";
+}
 .icon-code:before {
   content: "\f05f";
 }
@@ -170,7 +173,7 @@ option {
   background-color: white;
 }
 
-input[type="text"] {
+.field input {
   flex-grow: 1;
   width: 100%;
   min-width: 0;

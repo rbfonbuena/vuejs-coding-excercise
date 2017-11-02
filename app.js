@@ -6,7 +6,6 @@ const app = new Vue({
     fromRate: 1,
     toRate: 0,
     currencies: null,
-    rates: null,
     results: [],
     errors: []
   },
@@ -19,7 +18,6 @@ const app = new Vue({
     handleCurrencyChange: (e) => {
       let selectedCurrency = e.target.options;
       let index = e.target.selectedIndex;
-      console.log(selectedCurrency[index].value);
       return this.fromCurrency = selectedCurrency[index].value;
     },
     getCurrencies: function() {
@@ -45,6 +43,9 @@ const app = new Vue({
       })
     },
     getQuoteRate: function() {
+      if ( isNaN(this.fromRate) ) {
+        return this.fromRate = 1;
+      }
       if ( this.fromCurrency === this.toCurrency ) {
         let newRate = this.fromRate * 1;
         return this.toRate = newRate.toFixed(3);
@@ -54,8 +55,7 @@ const app = new Vue({
       }
     },
   },
-  computed: {
-  },
+  computed: {},
   mounted: function() {
     this.$nextTick(function() {
       this.getFxRates();

@@ -30,7 +30,7 @@
               <option v-for="(name,code) in currencies" :value="code">{{ code }} - {{ name }}</option>
             </select>
           </div>
-          <input type="text" v-model="fromRate">
+          <input type="text" v-model="fromRate" maxlength="8">
         </div>
       </div>
 
@@ -42,7 +42,7 @@
               <option v-for="(name,code) in currencies" :value="code">{{ code }} - {{ name }}</option>
             </select>
           </div>
-          <input readonly type="text" :value="toRate">
+          <input readonly type="text" v-model="toRate">
         </div>
       </div>
       <div class="data-time">Exchange rate as of: <strong>{{ results.date }}</strong></div>
